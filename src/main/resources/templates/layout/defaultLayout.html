@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <!-- 공통 css, js, meta tag -->
+    <th:block th:replace="fragments/commonHead"></th:block>
+    <style>
+        .nodrag {
+            -webkit-touch-callout: none;
+            user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+    <script>
+        function w3_open() {
+            document.getElementById("main").style.marginLeft = "15%";
+            document.getElementById("mySidebar").style.width = "15%";
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("openNav").setAttribute('onclick', 'w3_close()');
+        }
+        function w3_close() {
+            document.getElementById("main").style.marginLeft = "0%";
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("openNav").style.display = "inline-block";
+            document.getElementById("openNav").setAttribute('onclick', 'w3_open()');
+        }
+    </script>
+    <th:block layout:fragment="head"></th:block>
+
+</head>
+
+<body>
+    <!-- navbar  -->
+    <div class="w3-bar bg-primary pr-4 w3-text-white">
+        <th:block th:if="${sidebar}==show">
+            <button id="openNav" class="w3-bar-item w3-button bg-primary w3-xlarge mx-2"
+                onclick="w3_open()">&#9776;</button>
+        </th:block>
+        <th:block th:unless="${sidebar}==show">
+            <div class="nodrag w3-bar-item text-primary bg-primary w3-xlarge mx-2">&#9776;</div>
+        </th:block>
+        <form method="POST">
+            <th:block th:replace="fragments/login"></th:block>
+            <div class="w3-left row mx-1">
+                <button class="w3-bar-item w3-button w3-xlarge " formaction="/" formmethod="POST">내 할일</button>
+                <button class="w3-bar-item w3-button w3-xlarge " formaction="/lesson/myclass"
+                    formmethod="POST">내강의</button>
+                <th:block th:if="${membertype}==user"> 
+                <button class="w3-bar-item w3-button w3-xlarge " formaction="/lesson/enrolment"
+                    formmethod="POST">강의신청</button>
+                </th:block>
+                <th:block th:if="${membertype}==admin">
+                <button class="w3-bar-item w3-button w3-xlarge " formaction="/lesson/makelesson" formmethod="POST">강의
+                    만들기</button>
+                </th:block>
+               
+            </div>
+            <div class="p-1">
+                <div class="row">
+                    <div class="col pb-1 px-0 text-right">
+                        <span th:text="${name}"></span>(<span th:text="${username}"></span>)님, 환영합니다.
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <button class="w3-button w3-small px-2 py-0" formaction="#" formmethod="POST">내 정보</button>
+                    <button class="w3-button w3-small px-2 py-0" formaction="/logout" formmethod="POST">로그아웃</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- sidebar -->
+
+    <th:block layout:fragment="sidebar"></th:block>
+
+    <div id="main">
+
+
+
+        <!-- page content body 구성 -->
+        <th:block layout:fragment="body"></th:block>
+        <!-- 공통 footer -->
+        <th:block th:replace="fragments/footer"></th:block>
+    </div>
+
+
+
+
+
+</body>
+
+</html>

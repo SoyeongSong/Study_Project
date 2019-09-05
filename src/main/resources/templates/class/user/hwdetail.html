@@ -1,0 +1,38 @@
+<div xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/defaultLayout">
+    <th:block layout:fragment="sidebar"> <th:block th:replace="fragments/sidebar :: sidebar_user"></th:block> </th:block>
+    <th:block layout:fragment="body">
+            <div class="container py-5">
+                <h3>내용</h3>
+                <div class="dropdown-divider"></div>
+                    <div class="mb-3">
+                        <label for="title">제목</label>
+                        <input type="text" class="form-control" name="title" id="title" th:value="${resultMap.HW_NAME}" readonly>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="reg_id">제출 마감일</label>
+                        <input type="text" class="form-control" name="reg_id" id="reg_id" th:value="${resultMap.DATE}" readonly>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="content">내용</label>
+                        <textarea class="form-control" rows="5" name="content" id="content" th:text=${resultMap.CONTENT} readonly></textarea>
+                    </div>
+    
+                <form>
+                    <th:block th:replace="fragments/login"></th:block>
+                    <th:block th:replace="fragments/lesson"></th:block>
+                    <h3>과제 제출</h3>
+                    <div class="dropdown-divider"></div>
+                    <div class="input-group mb-3 d-flex justify-content-center">
+                        <textarea cols="110" rows="5" name="CONTENT"></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary px-4" type="submit" th:value="${resultMap.HW_NUM}" name="HW_NUM" 
+                                formaction="/class/submit" formmethod="POST">제출</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+    </th:block>
+</div>

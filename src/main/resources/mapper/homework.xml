@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="homework">
+	<select id="list" resultType="Map" parameterType="Map" timeout="10">
+		select *
+		from LESSON_HWLIST
+		where LESSON_NUM = #{LESSON_NUM}
+	</select>
+
+	<select id="read" resultType="Map" parameterType="Map">
+		select *
+		from LESSON_HWLIST
+		where HW_NUM = #{NUM}
+	</select>
+	<select id="check" resultType="Map" parameterType="Map">
+		select *
+		from LESSON_HWSUMIT
+		where HW_NUM = #{NUM}
+	</select>
+	<insert id="update" parameterType="Map">
+	    
+	</insert>
+
+	<insert id="insert" parameterType="Map">
+	    INSERT INTO LESSON_HWLIST (
+			LESSON_NUM
+			, HW_NAME
+			, DATE
+			, CONTENT
+		)
+		values(
+			#{LESSON_NUM}
+			, #{HW_NAME}
+			, #{DATE}
+			, #{CONTENT}
+		)
+	</insert>
+	<insert id="submit" parameterType="Map">
+	    INSERT INTO LESSON_HWSUMIT (
+			HW_NUM
+			, MEMBER_NAME
+			, DATE
+			, CONTENT
+		)
+		values(
+			#{HW_NUM}
+			, #{MEMBER_NAME}
+			, #{DATE}
+			, #{CONTENT}
+		)
+	</insert>
+
+	<delete id="delete" parameterType="Map">
+		
+	</delete>
+</mapper>

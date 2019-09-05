@@ -1,0 +1,8 @@
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/defaultLayout">
+    <th:block layout:fragment="head">
+        <th:block th:replace="fragments/calendar :: calendarhead"></th:block>
+    </th:block>
+    <th:block layout:fragment="body">
+        <th:block th:replace="fragments/calendar :: calendarbody"></th:block>
+    </th:block>
+</html>
